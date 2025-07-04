@@ -168,3 +168,28 @@ void signal_handle(int sig)
 }
 
 ```
+###
+```c
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 11.Write a program to handle the SIGSTOP signal (terminal stop)  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#include<stdio.h>
+#include<signal.h>
+#include<stdlib.h>
+
+void signal_handle(int sig);
+
+int main(void)
+{
+  signal(SIGSTOP, signal_handle);
+  while(1);
+  return 0;
+}
+
+void signal_handle(int sig)
+{
+    printf("\nReceived SIGSTOP\n");
+    exit(7);
+}
+```
