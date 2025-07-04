@@ -168,7 +168,7 @@ void signal_handle(int sig)
 }
 
 ```
-###
+### 6.Handle the SIGSTOP signal (terminal stop)
 ```c
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * 11.Write a program to handle the SIGSTOP signal (terminal stop)  *
