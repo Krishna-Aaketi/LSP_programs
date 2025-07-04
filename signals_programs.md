@@ -117,3 +117,54 @@ void signal_handle(int sig)
 }
 
 ```
+### 4.Handle the SIGABRT signal(Abort).
+```c
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 9. Write a program to handle the SIGABRT signal (abort).  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#include<stdio.h>
+#include<signal.h>
+#include<stdlib.h>
+
+void signal_handle(int sig);
+
+int main(void)
+{
+  signal(SIGABRT, signal_handle);
+  abort();
+  return 0;
+}
+
+void signal_handle(int sig)
+{
+    printf("Received SIGABRT\n");
+    exit(7);
+}
+```
+### 5.Handle the SIGQUIT signal
+```c
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 10. Implement a C program to handle the SIGQUIT signal    *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#include<stdio.h>
+#include<signal.h>
+#include<stdlib.h>
+
+void signal_handle(int sig);
+
+int main(void)
+{
+  signal(SIGQUIT, signal_handle);
+  while(1);
+  return 0;
+}
+
+void signal_handle(int sig)
+{
+    printf("\nReceived SIGQUIT\n");
+    exit(7);
+}
+
+```
