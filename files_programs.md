@@ -29,6 +29,7 @@ int main(void)
   if(ref<0)                                    // write system call return -1 write system call is failed
   {
     printf("Write system call is failed\n");
+    close(fd);
     return 0;
   }
   close(fd);                      //  close fd other than next runtime open system call fails
