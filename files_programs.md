@@ -165,10 +165,10 @@ int main(void)
   return 0;
 }
 ```
-## 6.Delete a file named "delete_me.txt"?
+## 6.Delete a file named "a.out"?
 ```c
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * 6. Implement a C program to delete a file named "delete_me.txt"?    *  
+ * 6. Implement a C program to delete a file named "a.out"?    *  
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include <stdio.h>
