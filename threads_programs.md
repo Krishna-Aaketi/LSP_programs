@@ -1778,6 +1778,107 @@ void *create_thread(void *arg)                                // thread function
   pthread_exit(temp);
 }
 ```
+### 38.sorts an array of strings?  
+```c
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 38.Write a C program to create a thread that sorts an array of strings?     *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<pthread.h>
+#include<string.h>
+
+void *create_thread(void *arg);
+
+int main(void)
+{
+  char arr[10][100];
+  int num;
+  char *ret;
+  pthread_t tid;
+  printf("Enter Number of string(<10):");
+  scanf("%d",&num);
+  for(i=0; i<n; i++)
+  {
+    scanf("%s",arr[i]);
+  }
+  if(pthread_create(&tid,NULL,create_thread,(void *)arr) !=0)     // Create the thread
+  {
+    printf("thread_creation is failed\n");
+    return 0;
+  }
+  pthread_join(tid,(void **)&ret);     // wait for the thread to finish
+  printf("%s\n",ret);
+  free(ret);
+  return 0;
+}
+
+void *create_thread(void *arg)                                // thread function
+{
+  char **ptr=(char **)(arg);
+
+  pthread_exit((void *)s);
+}
+
+```
+### 39.Implement a C program to create a thread that calculates the square root of a number?
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<pthread.h>
+
+void *create_thread(void *arg);
+
+int main(void)
+{
+  pthread_t tid;
+  float num;
+  float *ret;
+  printf("Enter Numbers :");
+  scanf("%f",&num);
+  if(pthread_create(&tid,NULL,create_thread,(void *)&num)!=0)   // Create the thread
+  {
+    perror("thread creation is failed\n");
+    return 0;
+  }
+  if(pthread_join(tid,(void **)&ret) !=0)
+  {
+    printf("thread_Join is failed\n");
+    return 7;
+  }
+  printf("%.2f\n",*ret);
+  free(ret);
+  return 0;
+}
+
+void *create_thread(void *arg)
+{
+  float i,*flag;
+  float num=*(float *)arg;
+  flag=malloc(sizeof(float));
+  if(flag==NULL)
+  {
+    printf("Malloc is failed\n");
+    pthread_exit(NULL);
+  }
+  if(num<=0)
+  {
+    printf("Enter valid number\n");
+    pthread_exit(NULL);
+  }
+  for(i=1;i<=num;i++)
+  {
+    if((i*i)>=num)
+    {
+      *flag=(num/i);
+
+      break;
+    }
+  }
+  pthread_exit(flag);
+}
+```
 ### 40.Calculates the average of numbers in an array?
 ```c
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
