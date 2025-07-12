@@ -1121,7 +1121,7 @@ void *create_thread(void *arg)                                // thread function
   }
 }
 ```
-### 25.Babble Sort on array of integer
+### 25.Bubble Sort on array of integer
 ```c
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *25.Implement a C program to create a thread that performs bubble sort on an array of integers? *
