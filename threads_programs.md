@@ -1824,6 +1824,9 @@ void *create_thread(void *arg)                                // thread function
 ```
 ### 39.Implement a C program to create a thread that calculates the square root of a number?
 ```c
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 39.Implement a C program to create a thread that calculates the square root of a number?    *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #include<stdio.h>
 #include<stdlib.h>
 #include<pthread.h>
