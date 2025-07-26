@@ -2205,6 +2205,59 @@ void *create_thread(void *arg)                                // thread function
   pthread_exit((void *)s);
 }
 ```
+### 50. Create two threads and check equal or not
+```c
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 50.Write a C program to create two threads and check equal or not    *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+
+void *thread_creation(void *arg);
+
+int main(void)
+{
+  pthread_t tid1, tid2;
+  if(pthread_create(&tid1, NULL, thread_creation, NULL) != 0)
+  {
+    perror("Failed to create tid1i\n");
+    return 1;
+  }
+  if(pthread_create(&tid2, NULL, thread_creation, NULL) != 0)
+  {
+    perror("Failed to create tid2\n");
+    return 1;
+  }
+  if(pthread_equal(tid1, tid2))
+  {
+    printf("The two threads are equal\n");
+  }
+  else
+  {
+    printf("The two threads are NOT equal\n");
+  }
+  if(pthread_join(tid1, NULL) != 0)
+  {
+    perror("Filed to thread_join_1\n");
+    retutn 7;
+  }
+  if(pthread_join(tid2, NULL) != 0)
+  {
+    perror("Filed to thread_join_2\n");
+    retutn 7;
+  }
+  return 0;
+}
+
+void *thread_creation(void *arg)
+{
+  printf("Thread %ld is Created\n", pthread_self());
+  pthread_exit(NULL);
+}
+```
 ### 51.Performs addition of two matrices?
 ```c
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -2526,7 +2579,7 @@ void *create_thread(void *arg)
   return NULL;
 }
 ```
-### 61.
+### 61. Prints the even numbers between 1 and 20? 
 ```c
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * 61.Write a C program to create a thread that prints the even numbers between 1 and 20?      *
@@ -2564,7 +2617,7 @@ void *create_thread(void *arg)                                // thread function
   pthread_exit(0);
 }
 ```
-###
+### 63. Calculates the sum of squares of numbers from 1 to 10
 ```c
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * 63.Implement a C program to create a thread that calculates the sum of squares of           *
@@ -2600,4 +2653,201 @@ void *create_thread(void *arg)                                // thread function
   pthread_exit(0);
 }
 
+```
+### 64. Calculates the product of numbers from 1 to 5? 
+```c
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 64.Write a C program to create a thread that calculates the product of numbers from 1 to 5? *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<pthread.h>
+
+void *create_thread(void *arg);
+
+int main(void)
+{
+  pthread_t tid;
+  if(pthread_create(&tid,NULL,create_thread,NULL) !=0)     // Create the thread
+  {
+    printf("thread creation is failed\n");
+    return 0;
+  }
+  pthread_join(tid,NULL);                // wait for the thread to finish
+  return 0;
+}
+
+void *create_thread(void *arg)                                // thread function
+{
+  int i=1,product=1;
+  for(i=1;i<=5;i++)
+  {
+    product *= i;
+  }
+  printf("%d\n",product);
+  pthread_exit(0);
+}
+```
+### 74. checks if a given number is divisible by another given number? 
+```c
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 74.Implement a C program to create a thread that checks if a given number is divisible by   *
+ * another given number?                                                                       *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<pthread.h>
+
+struct data
+{
+  int num;
+  int div;
+};
+void *create_thread(void *arg);
+
+int main(void)
+{
+  pthread_t tid1;             // Thread
+  struct data d;
+  int *ptr;
+  printf("Enter Number and range:");
+  scanf("%d %d",&d.num,&d.div);
+  if(pthread_create(&tid1,NULL,create_thread,(void *)&d)!=0)     // Create the thread
+  {
+    printf("thread creation is failed\n");
+    return 0;
+  }
+  pthread_join(tid1,(void **)&ptr);     // wait for the thread to finish
+  if(*ptr==1)
+  {
+    printf("Given number=%d is not divisible by given number=%d\n",d.div,d.num);
+  }
+  else
+  {
+    printf("Given number=%d is  divisible by given number=%d\n",d.div,d.num);
+  }
+  printf("%d\n",*ptr);
+  free(ptr);
+  return 0;
+}
+
+void *create_thread(void *arg)                                // thread function
+{
+  struct data *d=(struct data *)arg;
+  int *ptr=malloc(sizeof(int));
+  *ptr=( (d->num) % (d->div) );
+  pthread_exit((void *)ptr);
+}
+```
+### 75. prints the multiplication table of a given number up to a given limit?
+```c
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 75.Develop a C program to create a thread that prints the multiplication table of a given   *
+ * number up to a given limit?                                                                 *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#include<stdio.h>
+#include<unistd.h>
+#include<pthread.h>
+
+struct data
+{
+  int num;
+  int range;
+};
+void *create_thread(void *arg);
+
+int main(void)
+{
+  pthread_t tid1;             // Thread
+  struct data d;
+  printf("Enter Number and range:");
+  scanf("%d %d",&d.num,&d.range);
+  if(pthread_create(&tid1,NULL,create_thread,(void *)&d)!=0)     // Create the thread
+  {
+    printf("thread creation is failed\n");
+    return 0;
+  }
+  pthread_join(tid1,NULL);                          // wait for the thread to finish
+  return 0;
+}
+
+void *create_thread(void *arg)                                // thread function
+{
+  struct data *d=(struct data *)arg;
+  int i=0;
+  while(i<=d->range)
+  {
+    printf("%d * %d  = %d\n",d->num,i,(d->num*i));
+    i++;
+  }
+}
+```
+### 78. prints numbers from 10 to 1 in descending order using mutex locks
+```c
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 78.Develop a C program to create a thread that prints numbers from 10 to 1 in descending order  *
+ * using mutex locks                                                                               *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#include<stdio.h>
+#include<unistd.h>
+#include<pthread.h>
+
+pthread_mutex_t lock;
+int num=10;
+void *create_thread(void *arg);
+
+int main(void)
+{
+  pthread_t tid1;                                     // Thread
+  if(pthread_mutex_init(&lock,NULL) !=0 )
+  {
+    printf("mutex is failed\n");
+    return 17;
+  }
+  if(pthread_create(&tid1,NULL,create_thread,"decrement_Thread")!=0)     // Create the thread
+  {
+    printf("thread creation is failed\n");
+    return 0;
+  }
+  pthread_join(tid1,NULL);                          // wait for the thread to finish
+  pthread_mutex_destroy(&lock);
+  return 0;
+}
+
+void *create_thread(void *arg)                                // thread function
+{
+  char *str=(char *)arg;
+  int i=0;
+  while(i<10)
+  {
+    pthread_mutex_lock(&lock);
+    printf("%s:%d\n",str,num--);
+    pthread_mutex_unlock(&lock);
+    i++;
+  }
+}
+```
+###
+```c
+/* * * * * * * * * * * * * * * * * * * * * * *
+ * 79. Write a C program to get Stack size   *
+ * * * * * * * * * * * * * * * * * * * * * * */
+
+#include<stdio.h>
+#include<unistd.h>
+#include<pthread.h>
+
+int main(void)
+{
+  size_t stack_size;
+  pthread_attr_t attr;
+  pthread_attr_init(&attr);
+  pthread_attr_getstacksize(&attr,&stack_size);
+  printf("stack size=%ld\n",stack_size);
+  return 0;
+}
 ```
